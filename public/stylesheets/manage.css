@@ -43,8 +43,9 @@ tr:hover {
 /* 메뉴 영역 스타일 */
 .menu-area {
   background-color: #5228f5ff;
-  font-weight: lighter;
+  font-weight: medium;
   position: fixed;
+  display: none; /* 처음에는 메뉴바 숨김 */
   top: 0;
   left: 0;
   height: 100%;
@@ -73,8 +74,8 @@ tr:hover {
 /* 메뉴 로고 이미지 스타일 */
 .menu-logo#activeMenu {
   position: absolute;
-  bottom: 20px;
-  right: 0;
+  bottom: 25px;
+  right: 10px;
   padding: 10px;
   background-color: #5228f5ff;
   cursor: pointer;
@@ -101,20 +102,20 @@ tr:hover {
   transition: width 0.3s ease-in-out;
 }
 
-/* 메뉴바 스타일 */
-.menu {
-  display: none; /* 메뉴를 숨김 */
-}
-
 .hidden {
   display: none;
+}
+
+.active {
+  display: block;
 }
 
 /* 홈 로고 스타일을 설정합니다. */
 .home-logo {
   position: fixed;
-  bottom: 10px; /* 맨 아래 위치 조정 */
+  bottom: 0px; /* 맨 아래 위치 조정 */
   left: 10px; /* 맨 왼쪽 위치 조정 */
+  padding: 10px;
   z-index: 2; /* 다른 요소 위에 표시하기 위해 z-index 설정 */
   cursor: pointer;
 }
@@ -136,4 +137,15 @@ tr:hover {
 
 .menu-logo#activeMenu img:hover {
   opacity: 0.7; /* 호버 시 투명도 조정 */
+}
+
+/* 서브 메뉴 스타일 */
+.menu-area .sub-menu {
+  display: block; /* 서브 메뉴 항상 표시 */
+  list-style-type: none; 
+  padding-left: 20px; /* 상위 메뉴보다 작은 왼쪽 패딩 */
+}
+
+.menu-area .sub-menu li {
+  font-size: small !important; /* 상위 메뉴보다 작은 폰트 크기 */
 }

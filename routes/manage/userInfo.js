@@ -33,7 +33,7 @@ router.get('/', async function(req, res) {
         }
 
         // User 테이블에서 모든 사용자 데이터를 조회합니다.
-        connection.query('SELECT * FROM User', function(err, rows) {
+        connection.query('SELECT * FROM User WHERE UStatus = 1', function(err, rows) {
             connection.release(); // 에러가 발생해도 연결은 해제해야 합니다.
 
             if (err) {
@@ -47,7 +47,7 @@ router.get('/', async function(req, res) {
             });
 
             // 조회된 데이터와 함께 웹 페이지를 렌더링합니다.
-            res.render('manage', { title: '사용자 정보', rows: rows });
+            res.render('userInfo', { title: '사용자 정보', subtitle: '가입 회원 정보 조회', rows: rows });
         });
     });
 });

@@ -13,7 +13,7 @@ var mypageRouter = require('./routes/mypage/mypage');
 var logoutRouter = require('./routes/logout');
 var myinfoRouter = require('./routes/mypage/myinfo');
 var manageRouter = require('./routes/manage/manage');
-
+var userInfoRouter = require('./routes/manage/userInfo');
 var rentmapRouter = require('./routes/rent/rentmap');
 
 var app = express();
@@ -43,6 +43,7 @@ app.use('/login', loginRouter);
 app.use('/mypage', mypageRouter);
 app.use('/rentmap', rentmapRouter);
 app.use('/manage', manageRouter);
+app.use('/manage/userInfo', userInfoRouter);
 
 // /logout 경로에 대한 미들웨어 함수 정의
 app.post('/logout', (req, res) => {
