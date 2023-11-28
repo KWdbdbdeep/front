@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>홈 화면</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <!-- 네이버 지도 API -->
+  <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=30ulziybmo"></script>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <header>
+    <% if (userLoggedIn) { %>
+    <!-- 로그인 상태일 때 보이는 버튼 -->
+    <button id="mypageButton">마이페이지</button>
+    <nav id="mypage" class="hidden">
+      <ul>
+        <li><a href="/myinfo">내 정보 관리</a></li>
+        <li><a href="/myposts">내 게시글 보기</a></li>
+        <li><a href="/rentalhistory">대여 내역</a></li>
+        <li><a href="#" onclick="logout()">로그아웃</a></li>
+      </ul>
+    </nav>
+    <!-- <button onclick="location.href='/mypage'">마이 페이지</button> -->
+    <% } else { %>
+    <!-- 로그인되지 않은 상태일 때 보이는 버튼 -->
+    <button onclick="location.href='/join'">회원가입</button>
+    <button onclick="location.href='/login'">로그인</button>
+    <% } %>
+    <button id="menuButton">메뉴</button>
+  </header>
+
+  <main>
+    <div class="button-group">
+      <button id="rentButton">대여하기</button>
+      <button id="returnButton">반납하기</button>
+    </div>
+    <div class="map-container">
+      <div id="map" style="width:100%; height:800px;"></div>
+      <!-- <img src="여기에_지도_이미지_URL" alt="지도"> -->
+    </div>
+  </main>
+
+  <footer>
+    <!-- 필요한 경우 푸터 정보 추가 -->
+  </footer>
+  <script>
+    var mapOptions = {
+      center: new naver.maps.LatLng(37.3595704, 127.105399),
+      zoom: 10
+    };
+
+    var map = new naver.maps.Map('map', mapOptions);
+  </script>
+  <script>
+    const mypageButton = document.getElementById("mypageButton");
+    const mypage = document.getElementById("mypage");
+
+    mypageButton.addEventListener("click", toggleMenu);
+
+    function toggleMenu() {
+      mypage.classList.toggle("hidden");
+      console.log("toggleMenu 함수 호출");
+    }
+  </script>
+  <script src="/javascripts/logout.js"></script>
+</body>
+
+</html>
