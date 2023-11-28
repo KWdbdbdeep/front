@@ -86,7 +86,7 @@ router.post('/', function (req, res) {
                 req.session.userId = user.Id;
                 req.session.loggedIn = true;
 
-                if (user.Role === "Manager") {
+                if (user.Role === "Admin") {
                     res.redirect('/manage');
                 } else {
                     // 일반 사용자일 경우 홈 화면으로 리디렉션

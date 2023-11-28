@@ -52,4 +52,36 @@ router.get('/', async function(req, res) {
     });
 });
 
+// 사용자 등급 변경을 처리하는 라우트
+router.post('/changeRole', async (req, res) => {
+    const userId = req.body.id;
+    const newRole = req.body.role;
+
+    try {
+        const message = await updateUserRole(userId, newRole);
+        res.send({ message: message });
+    } catch ( error ) {
+        res.status(500).send({ error: error });
+    }
+});
+
+// 사용자 등급을 변경하는 함수
+async function updateUserRole(userId, newRole) {
+    return new Promise((resolve, reject) => {
+        pool.getConnection((err, connection) => {
+            if (err) {
+                return reject('데이터베이스 연결 실패: ' + err);
+            }
+            const sql = "UPDATE User SET Role = ? WHERE Id = ?";
+            connection.query(sql, [newRole, userId], (error, results) => {
+                connection.release();
+                if (error) {
+                    return reject('데이터베이스 쿼리 실행 실패: ' + error);
+                }
+                resolve('등급 변경이 완료되었습니다.');
+            });
+        });
+    });
+}
+
 module.exports = router;

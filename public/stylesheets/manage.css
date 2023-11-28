@@ -61,13 +61,17 @@ tr:hover {
 }
 
 .menu-area li {
+  color: #fff;
+  text-decoration: none;
+  font-size: larger;
+  display: block;
   margin-bottom: 20px;
 }
 
 .menu-area a {
   color: #fff;
   text-decoration: none;
-  font-size: large;
+  /* font-size: large; */
   display: block;
 }
 
@@ -147,5 +151,25 @@ tr:hover {
 }
 
 .menu-area .sub-menu li {
-  font-size: small !important; /* 상위 메뉴보다 작은 폰트 크기 */
+  font-size: medium; /* 상위 메뉴보다 작은 폰트 크기 */
+}
+
+button {
+  border-color: #5228f5ff; /* 변경된 테두리 색상 */
+  border-width: 1px;
+  transition: 0.3s;
+  margin-right: 32px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  display: flex;
+  align-items: center; /* 버튼 내용을 수직 중앙에 정렬 */
+  justify-content: center; /* 버튼 내용을 수평 중앙에 정렬 */
+  border-radius: 45px; /* 둥근 테두리 */
+
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #5228f5ff; /* 초기 배경색을 파란색으로 설정 */
+  color: white; /* 버튼 글씨 색상을 흰색으로 설정 */
 }
