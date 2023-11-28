@@ -11,6 +11,10 @@ var pool = mysql.createPool({
     port: process.env.DB_PORT
 });
 
+router.get('/', function(req, res, next) {
+    res.render('register', {title: 'Join Form!'});
+  });
+
 router.post('/', function(req, res) {
     var name = req.body.name;
     var username = req.body.username;
