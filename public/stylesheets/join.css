@@ -1,0 +1,102 @@
+body {
+  background-color: #91C8E4;
+  margin: 0;
+  padding: 20px;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  background-color: #fff;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box; /* 입력란의 크기를 padding을 포함하여 계산 */
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4682A9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #4682A9;
+}
+
+/* 전화번호 입력란 스타일 */
+.phone-inputs {
+  display: flex;
+}
+
+.phone-inputs input {
+  flex: 1;
+  margin-right: 5px; /* 오른쪽 여백 추가 */
+}
+
+.phone-inputs input:last-child {
+  margin-right: 0; /* 마지막 요소의 오른쪽 여백 제거 */
+}
+
+/* 생일 입력란 스타일 */
+.birthday-inputs {
+  display: flex;
+  gap: 5px;
+}
+.birthday-inputs select {
+  margin-right: 10px; /* 오른쪽 마진 추가 */
+}
+.birthday-inputs select:last-child {
+  margin-right: 0;
+}
+
+/* 성별 입력란 스타일 */
+.gender-inputs {
+  display: flex;
+  align-items: center; /* 내용을 세로 중앙에 정렬 */
+}
+
+/* 성별 라디오 버튼과 라벨 사이 간격 */
+.gender-inputs input,
+.gender-inputs label {
+  margin-right: 10px;
+}
+
+.gender-inputs label:last-child {
+  margin-right: 0;
+}

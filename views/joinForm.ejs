@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>회원가입</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/stylesheets/join.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>회원가입</h1>
+    <form id="registerForm" action="/register" method="post">
+        <div>
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="username">아이디:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="password">비밀번호:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <label for="confirm-password">비밀번호 확인:</label>
+            <input type="password" id="confirm-password" name="confirmPassword" required>
+        </div>
+        <div>
+            <label>전화번호:</label>
+            <div class="phone-inputs">
+                <input type="tel" id="phone1" name="phone1" maxlength="3" required> -
+                <input type="tel" id="phone2" name="phone2" maxlength="4" required> -
+                <input type="tel" id="phone3" name="phone3" maxlength="4" required>
+            </div>
+        </div>
+        <div>
+            <label for="birthday">생일:</label>
+            <input type="date" id="birthday" name="birthday" required>
+        </div>
+        <div>
+            <label>성별:</label>
+            <div class="gender-inputs">
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">남성</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">여성</label>
+            </div>
+        </div>
+        <div>
+         <label for="address">주소:</label>
+         <input type="text" id="address" name="address" required>
+        </div>
+
+        <button type="submit">가입완료</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#registerForm').on('submit', function(e) {
+                var password = $('#password').val();
+                var confirmPassword = $('#confirm-password').val();
+
+                if (password !== confirmPassword) {
+                    alert('비밀번호가 일치하지 않습니다.');
+                    e.preventDefault(); // 폼 제출을 중지
+                }
+            });
+
+            // 초기 년도, 월, 일 설정
+            for (var i = new Date().getFullYear(); i >= 1900; i--) {
+                $('#birthYear').append($('<option />').val(i).html(i));
+            }
+            for (var i = 1; i <= 12; i++) {
+                $('#birthMonth').append($('<option />').val(i).html(i));
+            }
+            updateDays(); // 일자 업데이트 함수 호출
+            // 초기값으로 현재 날짜 선택
+            $('#birthDay').val(new Date().getDate());
+
+            function updateDays() {
+                var month = $('#birthMonth').val();
+                var year = $('#birthYear').val();
+                $('#birthDay').empty();
+
+                // 월 인덱스를 1 빼서 조정 (1월 = 0, 2월 = 1, ...)
+                var days = new Date(year, month - 1, 0).getDate();
+                for (var i = 1; i <= days; i++) {
+                    $('#birthDay').append($('<option />').val(i).html(i));
+                }
+            }
+
+            $('#birthYear, #birthMonth').change(updateDays);
+        });
+    </script>
+</body>
+</html>
