@@ -1,0 +1,139 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table, th, td {
+  border: 1px solid #291477ff;
+}
+
+th {
+  background-color: #5228f5ff;
+  color: white;
+  text-align: left;
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+/* 메뉴 영역 스타일 */
+.menu-area {
+  background-color: #5228f5ff;
+  font-weight: lighter;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200px; /* 좌측 메뉴 영역의 너비 설정 */
+  padding: 10px;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.menu-area ul {
+  list-style-type: none;
+  padding: 5px;
+}
+
+.menu-area li {
+  margin-bottom: 20px;
+}
+
+.menu-area a {
+  color: #fff;
+  text-decoration: none;
+  font-size: large;
+  display: block;
+}
+
+/* 메뉴 로고 이미지 스타일 */
+.menu-logo#activeMenu {
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+  padding: 10px;
+  background-color: #5228f5ff;
+  cursor: pointer;
+}
+
+.menu-logo#hiddenMenu {
+  position: absolute;
+  top: 50px;
+  left: 180px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.menu-logo img {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+/* 메뉴 영역 열린 상태 스타일 */
+.menu-area.active {
+  width: 200px; /* 열린 상태의 너비 설정 */
+  transition: width 0.3s ease-in-out;
+}
+
+/* 메뉴바 스타일 */
+.menu {
+  display: none; /* 메뉴를 숨김 */
+}
+
+.hidden {
+  display: none;
+}
+
+/* 홈 로고 스타일을 설정합니다. */
+.home-logo {
+  position: fixed;
+  bottom: 10px; /* 맨 아래 위치 조정 */
+  left: 10px; /* 맨 왼쪽 위치 조정 */
+  z-index: 2; /* 다른 요소 위에 표시하기 위해 z-index 설정 */
+  cursor: pointer;
+}
+
+/* 홈 이미지 크기를 조정합니다. */
+.home-logo img {
+  width: 30px;
+  height: 30px;
+}
+
+/* 홈 이미지에 호버 효과를 추가합니다. */
+.home-logo img:hover {
+  opacity: 0.7; /* 호버 시 투명도 조정 */
+}
+
+.menu-logo#hiddenMenu img:hover {
+  opacity: 0.7; /* 호버 시 투명도 조정 */
+}
+
+.menu-logo#activeMenu img:hover {
+  opacity: 0.7; /* 호버 시 투명도 조정 */
+}

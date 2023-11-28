@@ -1,52 +1,98 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
 
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+<head>
+  <div class="menu-logo" id="hiddenMenu">
+    <img src="/images/menu.png" alt="메뉴 로고">
+  </div>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/manage.css' />
 
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>이메일</th>
-          <th>이름</th>
-          <th>전화번호</th>
-          <th>주소</th>
-          <th>성별</th>
-          <th>나이</th>
-          <th>등급</th>
-          <th>상태</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for(var i = 0; i < rows.length; i++) { %>
-          <tr>
-            <td><%= rows[i].Id %></td>
-            <td><%= rows[i].Email %></td>
-            <td><%= rows[i].Name %></td>
-            <td><%= rows[i].PhoneNum %></td>
-            <td><%= rows[i].Address %></td>
-            <td><%= rows[i].Gender %></td>
-            <td><%= rows[i].Age %></td>
-            <td><%= rows[i].Role %></td>
-            <td><%= rows[i].UStatus === 1 ? '가입' : '탈퇴' %></td>
-          </tr>
-        <% } %>
-      </tbody>
-    </table>
-    <script>
-      function calculateAge(birthday) { // 생년월일을 입력받아 만나이 계산
-        var birthDate = new Date(birthday);
-        var ageDifMs = Date.now() - birthDate.getTime();
-        var ageDate = new Date(ageDifMs); // miliseconds from epoch
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-      }
-    </script>
+</head>
 
-  </body>
+<body>
+  <h1><%= title %></h1>
+  <h2><%= subtitle %></h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>이메일</th>
+        <th>이름</th>
+        <th>전화번호</th>
+        <th>주소</th>
+        <th>성별</th>
+        <th>나이</th>
+        <th>등급</th>
+        <th>상태</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i = 0; i < rows.length; i++) { %>
+      <tr>
+        <td><%= rows[i].Id %></td>
+        <td><%= rows[i].Email %></td>
+        <td><%= rows[i].Name %></td>
+        <td><%= rows[i].PhoneNum %></td>
+        <td><%= rows[i].Address %></td>
+        <td><%= rows[i].Gender %></td>
+        <td><%= rows[i].Age %></td>
+        <td><%= rows[i].Role %></td>
+        <td><%= rows[i].UStatus === 1 ? '가입' : '탈퇴' %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <div class="menu-area">
+    <div class="menu-logo" id="activeMenu">
+      <img src="/images/menu.png" alt="메뉴 로고">
+    </div>
+    <ul>
+      <li><a href="/manage/userInfo">회원 관리</a></li>
+      <li><a href="/manage/bicycle">따릉이 관리</a></li>
+      <li><a href="/manage/rental">고장신고 내역</a></li>
+      <li><a href="#" onclick="logout()">로그아웃</a></li>
+    </ul>
+    <div class="home-logo">
+      <a href="/manage">
+        <img src="/images/home.png" alt="홈 로고">
+      </a>
+    </div>
+  </div>
+
+  <div class="menu">
+    <ul>
+      <li><a href="/myinfo">내 정보 관리</a></li>
+      <li><a href="/posts">내 게시글 보기</a></li>
+      <li><a href="/rentals">대여 내역</a></li>
+      <li><a href="#" onclick="logout()">로그아웃</a></li>
+    </ul>
+  </div>
+  <script>
+    function calculateAge(birthday) { // 생년월일을 입력받아 만나이 계산
+      var birthDate = new Date(birthday);
+      var ageDifMs = Date.now() - birthDate.getTime();
+      var ageDate = new Date(ageDifMs); // miliseconds from epoch
+      return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+  </script>
+  <script>
+    var menuActiveLogo = document.querySelector('#activeMenu');
+    var menuHiddenLogo = document.querySelector('#hiddenMenu');
+
+    var menuArea = document.querySelector('.menu-area');
+
+    menuActiveLogo.addEventListener('click', function () {
+      // menuArea.classList.toggle('active');
+      menuArea.classList.toggle('hidden');
+    });
+    menuHiddenLogo.addEventListener('click', function () {
+      // menuArea.classList.toggle('active');
+      menuArea.classList.toggle('hidden');
+    });
+  </script>
+  <script src="/viewscripts/logout.js"></script>
+
+</body>
+
 </html>
