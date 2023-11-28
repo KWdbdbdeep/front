@@ -15,7 +15,7 @@ var pool = mysql.createPool({
 
 router.get('/', function(req, res) {
     let userLoggedIn = req.session.loggedIn; // 세션에서 로그인 상태 확인
-    res.render('index', { userLoggedIn: userLoggedIn });
+    res.render('home', { userLoggedIn: userLoggedIn });
 });
 
 module.exports = router;
