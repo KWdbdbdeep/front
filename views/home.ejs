@@ -248,7 +248,7 @@
               <svg id="pie-chart" class="pie-chart"></svg>
             </div>
             <div class="home-btn-group">
-              <button class="home-hero-button1 button">대여하기</button>
+              <button id="rentButton" class="home-hero-button1 button">대여하기</button>
               <button class="home-hero-button2 button">반납하기&nbsp;→</button>
             </div>
           </div>
@@ -322,6 +322,11 @@
   <script data-section-id="navbar" src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
   <script src="viewscripts/home.js"></script>
   <script src="/javascripts/logout.js"></script>
+  <script>
+    document.getElementById('rentButton').addEventListener('click', function() {
+      window.location.href = '/rentmap'; // rentmap 라우터로 리디렉션
+    });
+  </script>
 </body>
 
 </html>
