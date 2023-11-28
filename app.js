@@ -5,17 +5,20 @@
   var logger = require('morgan');
   var session = require('express-session');
 
-  var homeRouter = require('./routes/home');
-  var usersRouter = require('./routes/users');
-  var register = require('./routes/register');
-  var loginRouter = require('./routes/login');
-  var mypageRouter = require('./routes/mypage/mypage');
-  var logoutRouter = require('./routes/logout');
-  var myinfoRouter = require('./routes/mypage/myinfo');
-  var Freeboard = require('./routes/Freeboard');
-  var Reportboard = require('./routes/Reportboard');
-  ///var Freewrite = require('./routes/Freewrite');
-  //var Reportwrite = require('./routes/Reportwrite');
+
+var homeRouter = require('./routes/home');
+var usersRouter = require('./routes/users');
+var register = require('./routes/register');
+var loginRouter = require('./routes/login');
+var mypageRouter = require('./routes/mypage/mypage');
+var logoutRouter = require('./routes/logout');
+var myinfoRouter = require('./routes/mypage/myinfo');
+var manageRouter = require('./routes/manage/manage');
+var userInfoRouter = require('./routes/manage/userInfo');
+var rentmapRouter = require('./routes/rent/rentmap');
+var Freeboard = require('./routes/Freeboard');
+var Reportboard = require('./routes/Reportboard');
+
 
   var app = express();
 
@@ -37,28 +40,31 @@
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, 'public')));
 
-  app.use('/', homeRouter);
-  app.use('/users', usersRouter);
-  app.use('/register', register);
-  app.use('/login', loginRouter);
-  app.use('/mypage', mypageRouter);
-  // /logout 경로에 대한 미들웨어 함수 정의
-  app.post('/logout', (req, res) => {
-    // 로그아웃 로직을 구현합니다.
-    req.session.destroy((err) => {
-      if (err) {
-        console.error("로그아웃 오류:", err);
-        res.status(500).json({ message: "로그아웃 실패" });
-      } else {
-        res.status(200).json({ message: "로그아웃 성공" });
-      }
-    });
-  });
-  app.use('/myinfo', myinfoRouter);
-  app.use('/Freeboard', Freeboard);
-  app.use('/Reportboard', Reportboard);
-  //app.use('/Freewrite', Freewrite);
-  // app.use('/Reportwrite', Reportwrite);
+
+ 
+
+app.use('/', homeRouter);
+app.use('/users', usersRouter);
+app.use('/register', register);
+app.use('/login', loginRouter);
+app.use('/mypage', mypageRouter);
+app.use('/rentmap', rentmapRouter);
+app.use('/manage', manageRouter);
+app.use('/manage/userInfo', userInfoRouter);
+app.use('/logout', logoutRouter);
+app.use('/Freeboard', Freeboard);
+app.use('/Reportboard', Reportboard);
+
+app.post('/changeRole', (req, res) => {
+  const userId = req.body.id;
+  const newRole = req.body.role;
+
+  updateUserRole(userId, newRole)
+      .then(message => res.send({ message }))
+      .catch(error => res.status(500).send({ error }));
+});
+app.use('/myinfo', myinfoRouter);
+
 
 
   // catch 404 and forward to error handler

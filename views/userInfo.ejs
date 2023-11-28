@@ -24,7 +24,7 @@
         <th>나이</th>
         <th>등급</th>
         <th>상태</th>
-        <th>상태 변경</th>
+        <th>등급 변경</th>
       </tr>
     </thead>
     <tbody>
@@ -40,7 +40,7 @@
         <td><%= rows[i].Role %></td>
         <td><%= rows[i].UStatus === 1 ? '가입' : '탈퇴' %></td>
         <td>
-          <button onclick="changeStatus('<%= rows[i].Id %>', '<%= rows[i].UStatus %>')">변경</button>
+          <button onclick="changeRole('<%= rows[i].Id %>', '<%= rows[i].Role %>')">변경</button>
         </td>
       </tr>
       <% } %>
@@ -91,33 +91,51 @@
     });
   </script>
   <script>
-    function changeStatus(userId, currentStatus) {
+    function changeRole(userId, currentRole) {
       var message;
-      var newStatus;
-      console.log("상태 변경 요청:", userId);
+      var newRole;
+      console.log("등급 변경 요청:", userId);
 
-      if (currentStatus == 1) {
-        message = "사용자를 탈퇴시키겠습니까?";
-        newStatus = 0;
-      } else if (currentStatus == 0) {
-        message = "이미 탈퇴된 회원입니다. 복귀시키겠습니까?";
-        newStatus = 1;
+      if (currentRole === 'Admin') {
+        message = "사용자 등급을 'User'로 변경하시겠습니까?";
+        newRole = 'User';
+      } else if (currentRole === 'User') {
+        message = "사용자 등급을 'Admin'으로 변경하시겠습니까?";
+        newRole = 'Admin';
       } else {
         // 현재 등급이 Admin이나 User가 아닌 경우
-        alert("변경할 수 있는 상태가 아닙니다.");
+        alert("변경할 수 있는 등급이 아닙니다.");
         return;
       }
 
-      // 확인 대화상자 표시
       if (confirm(message)) {
-        // 서버에 변경 요청을 보냄
-        // 여기서는 예시로 콘솔에 출력만 합니다.
-        console.log("상태 변경 요청:", userId, "새 상태:", newStatus);
-        // 실제 서버에 요청을 보내는 코드를 여기에 추가합니다.
-      } else {
-        // 취소한 경우
-        console.log("상태 변경 취소됨");
-      }
+      // 서버에 변경 요청을 보냄
+      fetch('/changeRole', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: userId, role: newRole })
+      })
+      .then(response => {
+        if(response.ok) {
+          return response.json();
+        }
+        throw new Error('Request failed.');
+      })
+      .then(data => {
+        console.log(data);
+        // 성공 메시지나 변경된 상태를 화면에 표시하는 로직을 추가할 수 있습니다.
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+      console.log("등급 변경 요청:", userId, "새 등급:", newRole);
+    } else {
+      // 취소한 경우
+      console.log("등급 변경 취소됨");
+    }
     }
   </script>
   <script src="/viewscripts/logout.js"></script>
