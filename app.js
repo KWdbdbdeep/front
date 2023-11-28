@@ -13,6 +13,8 @@ var mypageRouter = require('./routes/mypage/mypage');
 var logoutRouter = require('./routes/logout');
 var myinfoRouter = require('./routes/mypage/myinfo');
 
+var rentmapRouter = require('./routes/rent/rentmap');
+
 var app = express();
 
 // view engine setup
@@ -38,6 +40,8 @@ app.use('/users', usersRouter);
 app.use('/register', register);
 app.use('/login', loginRouter);
 app.use('/mypage', mypageRouter);
+app.use('/rentmap', rentmapRouter);
+
 // /logout 경로에 대한 미들웨어 함수 정의
 app.post('/logout', (req, res) => {
   // 로그아웃 로직을 구현합니다.
