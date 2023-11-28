@@ -20,7 +20,11 @@ function loadStationData(callback) {
 function initMap() {
   map = new naver.maps.Map('map', {
     center: new naver.maps.LatLng(37.5665, 126.9780),
-    zoom: 14
+    zoom: 14,
+    scaleControl: true,
+    logoControl: true,
+    mapTypeControl: true,
+    zoomControl: true
   });
 
   loadStationData(function(stations) {
@@ -52,6 +56,9 @@ function updateStationInfo(station) {
           <p><strong>자전거 거치대 수:</strong> ${station.rackTotCnt}</p>
           <p><strong>대여 가능한 자전거 수:</strong> ${station.parkingBikeTotCnt}</p>
           <p><strong>공유율:</strong> ${station.shared}%</p>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              대여하기
+          </button>
       </div>
   `;
 }
@@ -59,5 +66,36 @@ function updateStationInfo(station) {
 function closePopup() {
   document.getElementById("station-info").style.display = "none";
 }
+
+var currentLocationMarker = null; // 현재 위치 마커 전역 변수 선언
+
+function moveToCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var currentPosition = new naver.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      map.setCenter(currentPosition);
+      
+      // 현재 위치 마커 생성 또는 업데이트
+      if (!currentLocationMarker) {
+        currentLocationMarker = new naver.maps.Marker({
+          position: currentPosition,
+          map: map,
+          icon: {
+            content: '<img src=/images/cur_location.png alt="현재 위치" style="width:24px; height:24px;">',
+            anchor: new naver.maps.Point(12, 12)
+          }
+        });
+      } else {
+        currentLocationMarker.setPosition(currentPosition);
+      }
+    }, function(err) {
+      console.error(err);
+    });
+  } else {
+    alert("브라우저가 위치 정보를 지원하지 않습니다.");
+  }
+}
+
+document.getElementById('current-location-btn').addEventListener('click', moveToCurrentLocation);
 
 naver.maps.onJSContentLoaded = initMap;
