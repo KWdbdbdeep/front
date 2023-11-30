@@ -48,7 +48,7 @@ router.get('/', async function(req, res) {
             });
 
             // 조회된 데이터와 함께 웹 페이지를 렌더링합니다.
-            res.render('userInfo', { title: '사용자 정보', subtitle: '가입 회원 정보 조회', rows: rows });
+            res.render('userInfo', { title: '회원 정보', subtitle: '가입 회원 정보 조회', rows: rows });
         });
     });
 });

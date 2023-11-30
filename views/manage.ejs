@@ -24,7 +24,7 @@
         <th>나이</th>
         <th>등급</th>
         <th>상태</th>
-        <th>상태 변경</th>
+        <th>가입/탈퇴</th>
       </tr>
     </thead>
     <tbody>
@@ -111,7 +111,27 @@
       // 확인 대화상자 표시
       if (confirm(message)) {
         // 서버에 변경 요청을 보냄
-        // 여기서는 예시로 콘솔에 출력만 합니다.
+        fetch('/changeStatus', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: userId, status: newStatus })
+        })
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Request failed.');
+          })
+          .then(data => {
+            console.log(data);
+            // 성공 메시지나 변경된 상태를 화면에 표시하는 로직을 추가할 수 있습니다.
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+
         console.log("상태 변경 요청:", userId, "새 상태:", newStatus);
         // 실제 서버에 요청을 보내는 코드를 여기에 추가합니다.
       } else {

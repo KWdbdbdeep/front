@@ -62,6 +62,16 @@ app.post('/changeRole', (req, res) => {
     .then(message => res.send({ message }))
     .catch(error => res.status(500).send({ error }));
 });
+const updateUserStatus = require('./public/viewscripts/userStatus');
+
+app.post('/changeStatus', (req, res) => {
+  const userId = req.body.id;
+  const newStatus = req.body.status;
+
+  updateUserStatus(userId, newStatus)
+    .then(message => res.send({ message }))
+    .catch(error => res.status(500).send({ error }));
+});
 
 app.use('/myinfo', myinfoRouter);
 
