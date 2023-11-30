@@ -14,8 +14,8 @@
   var myinfoRouter = require('./routes/mypage/myinfo');
   var Freeboard = require('./routes/Freeboard');
   var Reportboard = require('./routes/Reportboard');
-  ///var Freewrite = require('./routes/Freewrite');
-  //var Reportwrite = require('./routes/Reportwrite');
+  var Freewrite = require('./routes/Freewrite');
+  var Reportwrite = require('./routes/Reportwrite');
 
   var app = express();
 
@@ -57,8 +57,9 @@
   app.use('/myinfo', myinfoRouter);
   app.use('/Freeboard', Freeboard);
   app.use('/Reportboard', Reportboard);
-  //app.use('/Freewrite', Freewrite);
-  // app.use('/Reportwrite', Reportwrite);
+  app.use('/Freewrite', Freewrite);
+  app.use('/Reportwrite', Reportwrite);
+  
 
 
   // catch 404 and forward to error handler
