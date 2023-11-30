@@ -11,19 +11,19 @@ var pool = mysql.createPool({
 
 
 router.get('/', function(req, res, next) {
-    res.render('Freewrite', {title:"게시판 글쓰기"});
+    res.render('Reportwrite', {title:"게시판 글쓰기"});
 });
 router.post('/', function(req, res){
-    var F_Title = req.body.title;
-    var F_MainText = req.body.content;
-    var datas = [F_Title, F_MainText];
+    var Q_Title = req.body.title;
+    var Q_MainText = req.body.content;
+    var datas = [Q_Title, Q_MainText];
     insertdata(datas,()=>{
-        res.redirect('/Freeboard');
+        res.redirect('/Reportboard');
     })
 })
 
 function insertdata(datas,callback){
-    var sql = "INSERT INTO FreeBoard(F_Title, F_MainText) VALUES(?,?)";
+    var sql = "INSERT INTO ReportBoard(Q_Title, Q_MainText) VALUES(?,?)";
     pool.query(sql, datas, function(err,rows){
         if (err) console.error("err:"+err);
         console.log("rows:"+JSON.stringify(rows));

@@ -79,12 +79,15 @@
         }
         input{
             text-align: left;
+            text-align: left; 
+            padding-top: 0; 
+            padding-left: 0;
         }
     </style>
 </head>
 <body>
     <h1>글쓰기</h1>
-    <form action="/Freewrite" id="postForm" method="post" onsubmit="return writeSubmit()">
+    <form action="/Reportwrite" id="postForm" method="post" onsubmit="return writeSubmit()">
     <div class="container">
             <hr>
             <div class="form-group">
@@ -99,7 +102,7 @@
             <hr>
             <div class="form-group">
                 <label  for="content" style="position: relative; top: -60px;">내용</label>
-                <textarea id="content" name="content" required></textarea>
+                <textarea id="content" name="content" placeholder="자전거와 대여소 번호를 입력해주세요" required ></textarea>
             </div>
             <hr>
         </div>
@@ -110,8 +113,8 @@
             <hr>
         
         <div class="write-button">
-            <button class="btn" type="button" style="cursor: pointer;" onclick="goToFreeboard()">취소</button>
-            <button class="Wbtn" type="submit" style="cursor: pointer;" onclick="goToFreeboard()">글쓰기</button>
+            <button class="btn" type="button" style="cursor: pointer;" onclick="goToReportboard()">취소</button>
+            <button class="Wbtn" type="submit" style="cursor: pointer;" onclick="goToReportboard()">글쓰기</button>
         </div>
     </form>
     <script>
@@ -131,8 +134,9 @@
                 return false;
             }
         }
-        function goToFreeboard() {
-        window.location.href = '/Freeboard';
+        
+        function goToReportboard() {
+        window.location.href = '/Reportboard';
     }
     </script>
 </body>

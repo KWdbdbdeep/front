@@ -21,7 +21,7 @@ function getListCallback(req, res, next) {
 }
 
 function queryList(callback) {
-    pool.query('SELECT F_LastUpdate_TIME, F_Title, id, F_views FROM ReportBoard', (err, rows, fields) => {
+    pool.query('SELECT Q_Board_Id, Q_Title, id, Q_views FROM ReportBoard', (err, rows, fields) => {
         if (err) throw err;
         callback(rows);
     });
