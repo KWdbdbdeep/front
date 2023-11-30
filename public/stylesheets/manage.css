@@ -1,0 +1,175 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table, th, td {
+  border: 1px solid #291477ff;
+}
+
+th {
+  background-color: #5228f5ff;
+  color: white;
+  text-align: left;
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+/* 메뉴 영역 스타일 */
+.menu-area {
+  background-color: #5228f5ff;
+  font-weight: medium;
+  position: fixed;
+  display: none; /* 처음에는 메뉴바 숨김 */
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200px; /* 좌측 메뉴 영역의 너비 설정 */
+  padding: 10px;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.menu-area ul {
+  list-style-type: none;
+  padding: 5px;
+}
+
+.menu-area li {
+  color: #fff;
+  text-decoration: none;
+  font-size: larger;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.menu-area a {
+  color: #fff;
+  text-decoration: none;
+  /* font-size: large; */
+  display: block;
+}
+
+/* 메뉴 로고 이미지 스타일 */
+.menu-logo#activeMenu {
+  position: absolute;
+  bottom: 25px;
+  right: 10px;
+  padding: 10px;
+  background-color: #5228f5ff;
+  cursor: pointer;
+}
+
+.menu-logo#hiddenMenu {
+  position: absolute;
+  top: 50px;
+  left: 180px;
+  padding: 10px;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.menu-logo img {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+/* 메뉴 영역 열린 상태 스타일 */
+.menu-area.active {
+  width: 200px; /* 열린 상태의 너비 설정 */
+  transition: width 0.3s ease-in-out;
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+/* 홈 로고 스타일을 설정합니다. */
+.home-logo {
+  position: fixed;
+  bottom: 0px; /* 맨 아래 위치 조정 */
+  left: 10px; /* 맨 왼쪽 위치 조정 */
+  padding: 10px;
+  z-index: 2; /* 다른 요소 위에 표시하기 위해 z-index 설정 */
+  cursor: pointer;
+}
+
+/* 홈 이미지 크기를 조정합니다. */
+.home-logo img {
+  width: 30px;
+  height: 30px;
+}
+
+/* 홈 이미지에 호버 효과를 추가합니다. */
+.home-logo img:hover {
+  opacity: 0.7; /* 호버 시 투명도 조정 */
+}
+
+.menu-logo#hiddenMenu img:hover {
+  opacity: 0.7; /* 호버 시 투명도 조정 */
+}
+
+.menu-logo#activeMenu img:hover {
+  opacity: 0.7; /* 호버 시 투명도 조정 */
+}
+
+/* 서브 메뉴 스타일 */
+.menu-area .sub-menu {
+  display: block; /* 서브 메뉴 항상 표시 */
+  list-style-type: none; 
+  padding-left: 20px; /* 상위 메뉴보다 작은 왼쪽 패딩 */
+}
+
+.menu-area .sub-menu li {
+  font-size: medium; /* 상위 메뉴보다 작은 폰트 크기 */
+}
+
+button {
+  border-color: #5228f5ff; /* 변경된 테두리 색상 */
+  border-width: 1px;
+  transition: 0.3s;
+  margin-right: 32px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  display: flex;
+  align-items: center; /* 버튼 내용을 수직 중앙에 정렬 */
+  justify-content: center; /* 버튼 내용을 수평 중앙에 정렬 */
+  border-radius: 45px; /* 둥근 테두리 */
+
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #5228f5ff; /* 초기 배경색을 파란색으로 설정 */
+  color: white; /* 버튼 글씨 색상을 흰색으로 설정 */
+}

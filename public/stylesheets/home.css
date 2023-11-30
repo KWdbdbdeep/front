@@ -2,7 +2,8 @@
   width: 100%;
   display: flex;
   overflow: auto;
-  min-height: 100vh;
+  /* min-height: 100vh; */
+
   align-items: center;
   flex-direction: column;
 }
@@ -15,9 +16,6 @@
   padding-bottom: var(--dl-space-space-oneandhalfunits);
   background-color: var(--dl-color-primary1-blue80);
 }
-
-
-
 
 .home-navbar-interactive {
   width: 90%;
@@ -102,6 +100,7 @@
 .home-login {
   border-color: var(--dl-color-primary1-blue100);
   border-width: 1px;
+  transition: 0.3s;
   margin-right: var(--dl-space-space-twounits);
   padding-left: 1.5rem;
   border-radius: 45px;
@@ -119,17 +118,19 @@
 }
 
 .home-login:hover {
-  border-color: rgba(41, 20, 119, 0.9);
+  color: white;
+  background-color: var(--dl-color-primary1-blue80);
+  border-color: var(--dl-color-primary1-blue80);
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  background-color: rgba(41, 20, 119, 0.9);
+  /* background-color: #3d6e70ff; */
 }
 
 .home-register:hover {
-  border-color: rgba(41, 20, 119, 0.9);
+  border-color:var(--dl-color-primary1-blue80);
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  background-color: rgba(41, 20, 119, 0.9);
+  background-color: var(--dl-color-primary1-blue80);
 }
 .home-burger-menu {
   display: none;
@@ -232,6 +233,7 @@
   padding-right: 1.5rem;
   background-color: var(--dl-color-primary1-blue100);
 }
+
 .home-register1:hover {
   border-color: #849492ff;
   background-color: #849492ff;

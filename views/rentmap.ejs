@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Rental Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ep8dpb3144"></script>
+    <style>
+        html, body {
+            height: 100%; /* 전체 높이를 100%로 설정 */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            height: 100%;
+        }
+        .map-container {
+            height: 100%; /* 지도 컨테이너를 전체 화면으로 설정 */
+            position: relative;
+        }
+        .current-location-icon {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 10;
+        }
+        .popup {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            z-index: 10;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .current-location-marker {
+            animation: blink 1s infinite; /* 1초 간격으로 깜빡이기 */
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* 빨간색 광원 효과 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <div id="map" class="map-container bg-gray-300 rounded-lg overflow-hidden">
+            <!-- 네이버 지도가 여기에 로드됩니다 -->
+            <button id="current-location-btn" class="current-location-icon">📍</button> <!-- 현재 위치 아이콘 추가 -->
+        </div>
+        <div id="station-info" class="popup bg-white p-4 rounded-lg shadow-lg" style="display:none;">
+            <!-- 동적으로 생성될 자전거 대여소 정보가 여기에 표시됩니다 -->
+        </div>
+    </div>
+    <script src="/viewscripts/rentmap.js"></script>
+</body>
+</html>

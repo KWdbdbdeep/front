@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>회원가입</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/stylesheets/join.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+        data-tag="font" />
+    <link rel="stylesheet" href="/stylesheets/register.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@200;300&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <h1>회원가입</h1>
     <form id="registerForm" action="/register" method="post">
@@ -53,16 +64,16 @@
             </div>
         </div>
         <div>
-         <label for="address">주소:</label>
-         <input type="text" id="address" name="address" required>
+            <label for="address">주소:</label>
+            <input type="text" id="address" name="address" required>
         </div>
 
         <button type="submit">가입완료</button>
     </form>
 
     <script>
-        $(document).ready(function() {
-            $('#registerForm').on('submit', function(e) {
+        $(document).ready(function () {
+            $('#registerForm').on('submit', function (e) {
                 var password = $('#password').val();
                 var confirmPassword = $('#confirm-password').val();
 
@@ -99,4 +110,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -47,9 +47,24 @@ router.get('/', async function(req, res) {
             });
 
             // 조회된 데이터와 함께 웹 페이지를 렌더링합니다.
-            res.render('index', { title: 'User List', rows: rows });
+            res.render('manage', { title: '회원 정보', subtitle: '전체 회원 정보 조회', rows: rows });
         });
     });
+});
+
+const updateUserStatus = require('../../public/viewscripts/userStatus')
+// 사용자 등급 변경을 처리하는 라우트
+router.post('/changeStatus', async (req, res) => {
+    const userId = req.body.id;
+    const newStatus = req.body.status;
+
+    try {
+        const message = await updateUserStatus(userId, newStatus);
+        res.send({ message: message });
+    } catch ( error ) {
+        console.error(error);
+        res.status(500).send({ error: error.toString() });
+    }
 });
 
 module.exports = router;
