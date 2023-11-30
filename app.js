@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 
+
 var homeRouter = require('./routes/home');
 var usersRouter = require('./routes/users');
 var register = require('./routes/register');
@@ -15,6 +16,9 @@ var myinfoRouter = require('./routes/mypage/myinfo');
 var manageRouter = require('./routes/manage/manage');
 var userInfoRouter = require('./routes/manage/userInfo');
 var rentmapRouter = require('./routes/rent/rentmap');
+var Freeboard = require('./routes/Freeboard');
+var Reportboard = require('./routes/Reportboard');
+
 
 var app = express();
 
@@ -45,29 +49,43 @@ app.use('/rentmap', rentmapRouter);
 app.use('/manage', manageRouter);
 app.use('/manage/userInfo', userInfoRouter);
 app.use('/logout', logoutRouter);
+app.use('/Freeboard', Freeboard);
+app.use('/Reportboard', Reportboard);
+
+const updateUserRole = require('./public/viewscripts/userRole');
 
 app.post('/changeRole', (req, res) => {
   const userId = req.body.id;
   const newRole = req.body.role;
 
   updateUserRole(userId, newRole)
-      .then(message => res.send({ message }))
-      .catch(error => res.status(500).send({ error }));
+    .then(message => res.send({ message }))
+    .catch(error => res.status(500).send({ error }));
 });
+const updateUserStatus = require('./public/viewscripts/userStatus');
+
+app.post('/changeStatus', (req, res) => {
+  const userId = req.body.id;
+  const newStatus = req.body.status;
+
+  updateUserStatus(userId, newStatus)
+    .then(message => res.send({ message }))
+    .catch(error => res.status(500).send({ error }));
+});
+
 app.use('/myinfo', myinfoRouter);
 
-
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  console.error(err.stack); // 에러 스택 트레이스 로깅
   // render the error page
   res.status(err.status || 500);
   res.render('error');

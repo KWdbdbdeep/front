@@ -13,6 +13,7 @@ var pool = mysql.createPool({
     port: process.env.DB_PORT
 });
 
+
 /* GET home page. */
 router.get('/', async function(req, res) {
     function calculateAge(birthday) {
@@ -47,11 +48,12 @@ router.get('/', async function(req, res) {
             });
 
             // 조회된 데이터와 함께 웹 페이지를 렌더링합니다.
-            res.render('userInfo', { title: '사용자 정보', subtitle: '가입 회원 정보 조회', rows: rows });
+            res.render('userInfo', { title: '회원 정보', subtitle: '가입 회원 정보 조회', rows: rows });
         });
     });
 });
 
+const updateUserRole = require('../../public/viewscripts/userRole')
 // 사용자 등급 변경을 처리하는 라우트
 router.post('/changeRole', async (req, res) => {
     const userId = req.body.id;
@@ -61,27 +63,9 @@ router.post('/changeRole', async (req, res) => {
         const message = await updateUserRole(userId, newRole);
         res.send({ message: message });
     } catch ( error ) {
-        res.status(500).send({ error: error });
+        console.error(error);
+        res.status(500).send({ error: error.toString() });
     }
 });
-
-// 사용자 등급을 변경하는 함수
-async function updateUserRole(userId, newRole) {
-    return new Promise((resolve, reject) => {
-        pool.getConnection((err, connection) => {
-            if (err) {
-                return reject('데이터베이스 연결 실패: ' + err);
-            }
-            const sql = "UPDATE User SET Role = ? WHERE Id = ?";
-            connection.query(sql, [newRole, userId], (error, results) => {
-                connection.release();
-                if (error) {
-                    return reject('데이터베이스 쿼리 실행 실패: ' + error);
-                }
-                resolve('등급 변경이 완료되었습니다.');
-            });
-        });
-    });
-}
 
 module.exports = router;

@@ -52,4 +52,19 @@ router.get('/', async function(req, res) {
     });
 });
 
+const updateUserStatus = require('../../public/viewscripts/userStatus')
+// 사용자 등급 변경을 처리하는 라우트
+router.post('/changeStatus', async (req, res) => {
+    const userId = req.body.id;
+    const newStatus = req.body.status;
+
+    try {
+        const message = await updateUserStatus(userId, newStatus);
+        res.send({ message: message });
+    } catch ( error ) {
+        console.error(error);
+        res.status(500).send({ error: error.toString() });
+    }
+});
+
 module.exports = router;
