@@ -1,0 +1,188 @@
+<!-- views/myinfo.ejs -->
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/mypage.css">
+  <title>내 정보 관리</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+    data-tag="font" />
+  <script src="/javascripts/jquery-3.7.1.min.js"></script>
+  <!-- 여기에 필요한 CSS 및 스타일링 링크를 추가하세요 -->
+</head>
+
+<body>
+  <header>
+    <!-- 여기에 헤더 내용을 추가하세요 -->
+  </header>
+
+  <main>
+    <h1>내 정보 관리</h1>
+    <div class="menu-logo" id="hiddenMenu">
+      <img src="/images/menu.png" alt="메뉴 로고">
+    </div>
+    <div class="user-info" id="profile">
+      <h2>프로필 정보</h2>
+
+      <!-- 사용자 정보를 보여주는 부분 -->
+      <p id="image"> <img src="<%= user.Image || '/images/user_default.png' %>" alt="프로필 사진" width="100" height="100" />
+      </p>
+
+      <p id="username">아이디: <span><%= user.Id %></span></p>
+      <p id="name">이름: <span><%= user.Name %></span></p>
+      <p id="email">이메일 : <span><%= user.Email %></span></p>
+      <p id="phone">전화번호 : <span><%= user.PhoneNum %></span></p>
+      <p id="address">주소 : <span><%= user.Address %></span></p>
+      <!-- 이메일, 연락처 정보, 주소 정보 등 추가 필드도 동일한 방식으로 추가 -->
+
+
+      <form id="editForm" style="display: none;">
+        <label for="newUsername">아이디:</label>
+        <input type="text" id="newUsername" name="newUsername"><br>
+        <label for="newName">이름:</label>
+        <input type="text" id="newName" name="newName"><br>
+        <label for="newEmail">이메일:</label>
+        <input type="email" id="newEmail" name="newEmail"><br>
+        <label for="newPhone">전화번호:</label>
+        <input type="tel" id="newPhone" name="newPhone"><br>
+        <label for="newAddress">주소:</label>
+        <input type="text" id="newAddress" name="newAddress"><br>
+        <label for="newImage">프로필 사진 변경:</label>
+        <input type="file" id="newImage" name="newImage"><br>
+        <button type="submit">저장</button>
+      </form>
+      <button id="editButton">수정</button>
+    </div>
+  </main>
+
+  <footer>
+    <!-- 여기에 푸터 내용을 추가하세요 -->
+  </footer>
+
+  <div class="menu-area">
+    <div class="menu-logo" id="activeMenu">
+      <img src="/images/menu.png" alt="메뉴 로고">
+    </div>
+    <ul>
+      <li><a href="/myinfo">내 정보 관리</a></li>
+      <li><a href="/posts">내 게시글 보기</a></li>
+      <li><a href="/rentals">대여 내역</a></li>
+      <li><a href="#" onclick="logout()">로그아웃</a></li>
+    </ul>
+    <div class="home-logo">
+      <a href="/">
+        <img src="/images/home.png" alt="홈 로고">
+      </a>
+    </div>
+  </div>
+
+  <div class="menu">
+    <ul>
+      <li><a href="/myinfo">내 정보 관리</a></li>
+      <li><a href="/posts">내 게시글 보기</a></li>
+      <li><a href="/rentals">대여 내역</a></li>
+      <li><a href="#" onclick="logout()">로그아웃</a></li>
+    </ul>
+  </div>
+
+  <script>
+    document.getElementById('editButton').addEventListener('click', function () {
+      // 아이디와 이름 필드를 입력 가능한 입력 상태로 변경
+      document.getElementById('username').style.display = 'none';
+      document.getElementById('name').style.display = 'none';
+      document.getElementById('email').style.display = 'none';
+      document.getElementById('phone').style.display = 'none';
+      document.getElementById('address').style.display = 'none';
+      document.getElementById('image').style.display = 'none';
+      document.getElementById('editButton').style.display = 'none';
+
+      // 수정 폼을 보여줍니다.
+      document.getElementById('editForm').style.display = 'block';
+      // 수정 완료 버튼을 활성화
+      this.disabled = true;
+    });
+
+    document.getElementById('editForm').addEventListener('submit', function (event) {
+      event.preventDefault(); // 폼 기본 동작 방지
+
+      // 수정한 정보를 가져와서 서버로 전송하는 코드 작성
+      var newUsername = document.getElementById('newUsername').value;
+      var newName = document.getElementById('newName').value;
+      var newEmail = document.getElementById('newEmail').value;
+      var newPhone = document.getElementById('newPhone').value;
+      var newAddress = document.getElementById('newAddress').value;
+      var newImage = document.getElementById('newImage').files[0]; // 파일 업로드 필드에서 파일 가져오기
+
+      var formData = new FormData();
+      formData.append('newUsername', newUsername);
+      formData.append('newName', newName);
+      formData.append('newEmail', newEmail);
+      formData.append('newPhone', newPhone);
+      formData.append('newAddress', newAddress);
+      formData.append('newImage', newImage);
+
+      // 서버로 정보를 전송하고 응답을 처리하는 코드 작성
+      fetch('/updateUserInfo', {
+          method: 'POST',
+          body: formData, // FormData를 전송합니다.
+        })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          if (data.success) {
+            // 수정이 성공하면 화면을 업데이트하고 수정 버튼을 활성화
+            document.getElementById('username').textContent = newUsername;
+            document.getElementById('name').textContent = newName;
+            document.getElementById('email').textContent = newEmail;
+            document.getElementById('phone').textContent = newPhone;
+            document.getElementById('address').textContent = newAddress;
+
+            // 프로필 사진 업데이트
+            var imageElement = document.getElementById('image');
+            imageElement.innerHTML = ''; // 이전 내용 초기화
+            var profileImage = document.createElement('img');
+            profileImage.src = data.profileImageUrl; // 서버에서 받은 프로필 이미지 URL 설정
+            profileImage.alt = '프로필 사진'; // 대체 텍스트 설정
+            imageElement.appendChild(profileImage);
+
+            // 수정 버튼을 활성화하고 저장 버튼을 삭제
+            document.getElementById('editButton').disabled = false;
+            document.getElementById('editForm').style.display = 'none';
+          } else {
+            // 수정이 실패하면 오류 메시지를 처리
+            console.error('수정 실패:', data.message);
+            alert('수정에 실패했습니다. 다시 시도해주세요.');
+          }
+        });
+    });
+  </script>
+  <script>
+    var menuActiveLogo = document.querySelector('#activeMenu');
+    var menuHiddenLogo = document.querySelector('#hiddenMenu');
+
+    var menuArea = document.querySelector('.menu-area');
+
+    menuActiveLogo.addEventListener('click', function () {
+      // menuArea.classList.toggle('active');
+      menuArea.classList.toggle('hidden');
+    });
+    menuHiddenLogo.addEventListener('click', function () {
+      // menuArea.classList.toggle('active');
+      menuArea.classList.toggle('hidden');
+    });
+  </script>
+  <script src="/viewscripts/logout.js"></script>
+</body>
+
+</html>

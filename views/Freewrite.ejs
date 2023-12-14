@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글쓰기</title>
+    <style>
+        h1{
+            text-align: left;            
+            margin-top: 50px;
+            font-family: Inter;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 5  00;
+            line-height: normal;
+            margin-left:200px ;
+        }
+        body {
+            font-family: Arial, Inter;
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            margin-top:30px;
+            text-align: left;
+        }
+        .form-group{
+            margin-left:200px;
+        }
+        hr{
+            width: 75%;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .btn{
+           display: block;
+           width: 150px;
+           height : 50px;
+           background : white;
+           border: 0.5px solid black;
+        }
+        .Wbtn{
+           display: block;
+           width: 150px;
+           height : 50px;
+           background : #749BC2;
+           border: 0.5px solid black;
+        }
+        label{
+            margin-right: 150px;
+        }
+        #title{
+            text-align: center;
+            display : inline-block;
+            width : 616px;
+            height : 46px;
+            border : 0.3px  solid #DEF1E5;
+            background: #FFFFFF;
+        }
+        #user_id{
+            color: #F8F9FA;
+        }
+        #content{
+            text-align: center;
+            display : inline-block;
+            width : 616px;
+            height : 150px;
+            border : 0.3px  solid #DEF1E5;
+            background: #FFFFFF;
+        }
+        .write-button{
+            text-align: center;
+        }
+        .btn,.Wbtn{
+            display: inline-block;
+        }
+        input{
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>글쓰기</h1>
+    <div class="container">
+        <form id="postForm">
+            <hr>
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="user-id">아이디</label>
+                <tr id="user_id"> 유저아이디<tr>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label  for="content" style="position: relative; top: -60px;">내용</label>
+                <textarea id="content" name="content" required></textarea>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="image">사진 첨부</label>
+                <input type="file" id="image" name="image">
+            </div>
+            <hr>
+        </form>
+    </div>
+    <div class="write-button">
+        <button class="btn"type="button" onclick="addPost()">취소</button>
+        <button class="Wbtn"type="button" onclick="addPost()">글쓰기</button>
+    </div>
+    <script>
+        function addPost() {
+            var title = document.getElementById('title').value;
+            var userId = document.getElementById('user_id').textContent;
+            var content = document.getElementById('content').value;
+
+            var newPost = document.createElement('div');
+            newPost.innerHTML = '<hr>' +
+                                '<strong>제목:</strong> ' + title + '<br>' +
+                                '<strong>아이디:</strong> ' + userId + '<br>' +
+                                '<strong>내용:</strong> ' + content;
+
+            document.getElementById('postList').appendChild(newPost);
+
+            document.getElementById('title').value = '';
+            document.getElementById('content').value = '';
+        }
+    </script>
+</body>
+</html>
