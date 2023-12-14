@@ -57,7 +57,7 @@
            color: white;
         }
         .write-button{
-            margin-left: 180px;
+            margin-left: 190px;
         }
         hr {
             width: 70%;
@@ -114,12 +114,24 @@
             list-style:none;
             float:left; 
             text-align:center;
-        
+        }
+        span.logo {
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin-left: 150px;
+            color: black;
+            font-size: 40px;
+            margin-top: 20px;
+            display: inline-block;
+            vertical-align: middle;
         }
     </style>
 </head>
 <body>
-    <header>       
+    <header>
+        <span class="logo" style="cursor: pointer;" onclick="goTohome()">따릉이</span>
     </header>
     <h1>
         <span class="free-board" style="cursor: pointer;" onclick="goToFreeboard()">자유게시판</span>
@@ -154,6 +166,9 @@
 </table>
     
 <script>
+    function goTohome(){
+            window.location.href = '/';
+        }
     function goToFreeboard() {
         window.location.href = '/Freeboard';
     }

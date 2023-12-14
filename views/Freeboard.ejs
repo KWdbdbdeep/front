@@ -23,6 +23,18 @@
             line-height: normal;
             margin-left:80px ;
         }
+        span.logo {
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin-left: 150px;
+            color: black;
+            font-size: 40px;
+            margin-top: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
         span.free-board {
             display: inline-block;
             width: 150px;
@@ -117,6 +129,9 @@
     </style>
 </head>
 <body>
+    <header>
+        <span class="logo" style="cursor: pointer;" onclick="goTohome()">따릉이</span>
+    </header>
         <h1>
         <span class="free-board">자유게시판</span>
         <span class="report-board" style="cursor: pointer;" onclick="goToreportboard()">고장 및 신고게시판</span>
@@ -149,13 +164,16 @@
         <% } %>
     </table>
     <script>
+        function goTohome(){
+            window.location.href = '/';
+        }
         function goToreportboard() {
             window.location.href = '/reportboard';
         }
         function goToFreewrite(){
             window.location.href = '/Freewrite';
         }
-function goToFreeread(boardId) {
+        function goToFreeread(boardId) {
         window.location.href = '/Freeread/' + boardId;
         }
 

@@ -36,7 +36,7 @@ router.post('/', function(req, res) {
 function insertdata(datas, callback, req) {
     if (req && req.session && req.session.userId) {
         var userId = req.session.userId;
-    var sql = "INSERT INTO FreeBoard(F_Title, F_MainText, id) VALUES(?,?,?)";
+        var sql = "INSERT INTO FreeBoard(F_Title, F_MainText, id) VALUES(?,?,?)";
         datas.push(userId);
     pool.query(sql, datas, function(err, rows) {
         if (err) {
