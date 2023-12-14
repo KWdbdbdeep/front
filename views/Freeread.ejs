@@ -4,7 +4,7 @@
     <script src="/javascripts/jquery-3.7.1.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>글쓰기</title>
+    <title>글조회</title>
     <style>
         h1{
             text-align: left;            
@@ -60,17 +60,6 @@
             border : 0.3px  solid #DEF1E5;
             background: #FFFFFF;
         }
-        #user_id{
-            color: #F8F9FA;
-        }
-        #content{
-            text-align: left;
-            display : inline-block;
-            width : 616px;
-            height : 150px;
-            border : 0.3px  solid #DEF1E5;
-            background: #FFFFFF;
-        }
         .write-button{
             text-align: center;
         }
@@ -80,57 +69,48 @@
         input{
             text-align: left;
         }
+        .no-file {
+            color: gray;
+        }
     </style>
 </head>
 <body>
-    <h1>글쓰기</h1>
-    <form action="/Freewrite" id="postForm" method="post" onsubmit="return writeSubmit()">
+    <h1>글조회</h1>
+    <form action="/Freeboard/update" method="get">
     <div class="container">
+             <input type="hidden" name="F_Board_Id" value="<%=row.F_Board_Id %>"/>
             <hr>
             <div class="form-group">
                 <label for="title">제목</label>
-                <input type="text" id="title" name="title" required>
+                <td><%= row.F_Title %></td>
             </div>
             <hr>
             <div class="form-group">
                 <label for="user-id">아이디</label>
-                <td id="user_id"> <%= userId %><td>
+                <td> <%= row.id %></td>
             </div>
             <hr>
             <div class="form-group">
-                <label  for="content" style="position: relative; top: -60px;">내용</label>
-                <textarea id="content" name="content" required></textarea>
+                <label>내용</label>
+                <td><%= row.F_MainText %></td>
             </div>
             <hr>
-        </div>
+            </div>
             <div class="form-group">
-                <label for="image">사진 첨부</label>
-                <input type="file" id="image" name="image">
+                <label for="image">사진</label>
+                <% if (row.F_Image) { %>
+                    <td><%= row.F_Image %></td>
+                <% } else { %>
+                    <td class="no-file">첨부된 파일 없음</td>
+                <% } %>
             </div>
             <hr>
         
         <div class="write-button">
-            <button class="btn" type="button" style="cursor: pointer;" onclick="goToFreeboard()">취소</button>
-            <button class="Wbtn" type="submit" style="cursor: pointer;" onclick="goToFreeboard()">글쓰기</button>
+            <button class="btn" type="button" style="cursor: pointer;" onclick="goToFreeboard()">뒤로가기</button>
         </div>
     </form>
     <script>
-        function writeSubmit(){
-            if($("#title").val().trim()==""){
-                var message = "제목을 입력하세요.";
-                $("#title").val("");
-                $("#title").focus();
-                alert(message);
-                return false;
-            }
-            if($("#content").val().trim()==""){
-                var message = "본문 내용을 입력하세요.";
-                $("#content").val("");
-                $("#content").focus();
-                alert(message);
-                return false;
-            }
-        }
         function goToFreeboard() {
         window.location.href = '/Freeboard';
     }
