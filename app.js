@@ -1,3 +1,4 @@
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -19,6 +20,8 @@ var rentmapRouter = require('./routes/rent/rentmap');
 var Freeboard = require('./routes/Freeboard');
 var Reportboard = require('./routes/Reportboard');
 var userStatisticsRouter = require('./routes/userStatistics');
+var Freewrite = require('./routes/Freewrite');
+var Reportwrite = require('./routes/Reportwrite');
 
 var app = express();
 
@@ -52,7 +55,8 @@ app.use('/logout', logoutRouter);
 app.use('/Freeboard', Freeboard);
 app.use('/Reportboard', Reportboard);
 app.use('/api', userStatisticsRouter);
-
+app.use('/Freewrite', Freewrite);
+app.use('/Reportwrite', Reportwrite);
 
 const updateUserRole = require('./public/viewscripts/userRole');
 
