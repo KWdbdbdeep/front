@@ -6,77 +6,168 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>글조회</title>
     <style>
-        h1{
-            text-align: left;            
+        header {
+            background-color: #5228f5ff;
+            height: 98px;
+            position: relative;
+        }
+
+        h1 {
+            text-align: left;
             margin-top: 50px;
             font-family: Inter;
             font-size: 30px;
             font-style: normal;
-            font-weight: 5  00;
+            font-weight: 500;
             line-height: normal;
-            margin-left:200px ;
+            margin-left: 200px;
         }
+
         body {
             font-family: Arial, Inter;
             margin: 0;
             padding: 0;
         }
-        .container{
-            margin-top:30px;
+
+        .container {
+            margin-top: 30px;
             text-align: left;
         }
-        .form-group{
-            margin-left:200px;
+
+        .form-group {
+            margin-left: 200px;
         }
-        hr{
+
+        hr {
             width: 75%;
             color: #333;
             margin-top: 20px;
             margin-bottom: 20px;
         }
-        .btn{
-           display: block;
-           width: 150px;
-           height : 50px;
-           background : white;
-           border: 0.5px solid black;
+       
+        .btn {
+            display: block;
+            width: 150px;
+            height: 50px;
+            background: white;
+            border: 0.5px solid black;
         }
-        .Wbtn{
-           display: block;
-           width: 150px;
-           height : 50px;
-           background : #5228f5ff;
-           border: 0.5px solid black;
-           color: white;
+
+        .Wbtn {
+            display: block;
+            width: 150px;
+            height: 50px;
+            background: #5228f5ff;
+            border: 0.5px solid black;
+            color: white;
         }
-        label{
+
+        label {
             margin-right: 150px;
         }
-        #title{
+
+        #title {
             text-align: left;
-            display : inline-block;
-            width : 616px;
-            height : 46px;
-            border : 0.3px  solid #DEF1E5;
+            display: inline-block;
+            width: 616px;
+            height: 46px;
+            border: 0.3px solid #DEF1E5;
             background: #FFFFFF;
         }
-        .write-button{
+
+        .write-button {
             text-align: center;
         }
-        .btn,.Wbtn{
+
+        .btn,
+        .Wbtn {
             display: inline-block;
+            background: #5228f5ff;
+            border: 0.5px solid black;
+            color: white;
         }
-        input{
+
+        input {
             text-align: left;
         }
+
         .no-file {
+            color: gray;
+        }
+
+        span.logo {
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin-left: 150px;
+            color: black;
+            font-size: 40px;
+            margin-top: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .comments-container {
+            text-align: left;
+            margin-top: 50px;
+            font-family: Inter;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 150;
+            line-height: normal;
+            margin-left: 200px;
+        }
+
+        .no-comments {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .comment-form {
+            text-align: left;
+            margin-top: 50px;
+            font-family: Inter;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: normal;
+            margin-left: 50px;
+        }
+        
+        textarea{
+            text-align: left;
+            margin-left: 200px;
+            display : inline-block;
+            width : 1150px;
+            height : 80px;
+            border : 0.3px  solid black;
+            background: #FFFFFF;
+        }
+        textarea::placeholder {
+            text-align: left;
+            font-size: 15px;
+        }
+        .comments-list{
+            width: 100%; 
+        }
+        h2{
+            text-align: left;
+            margin-top: 50px;
+            font-family: Inter;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
             color: gray;
         }
     </style>
 </head>
 <body>
+    <header>
+        <span class="logo" style="cursor: pointer;" onclick="goTohome()">따릉이</span>
+    </header>
     <h1>글조회</h1>
-    <form action="/Reportboard/update" method="get">
     <div class="container">
              <input type="hidden" name="Q_Board_Id" value="<%=row.Q_Board_Id %>"/>
             <hr>
@@ -109,8 +200,35 @@
         <div class="write-button">
             <button class="btn" type="button" style="cursor: pointer;" onclick="goToReportboard()">뒤로가기</button>
         </div>
-    </form>
+        <div class="comments-container">
+            <h2 class="comments-title">댓글</h2>
+            <div>
+                <% if (comments && comments.length > 0) { %>
+                <!-- 댓글이 있을 때의 처리 -->
+                <div class="comments-list">
+                    <% for (var i = 0; i < comments.length; i++) { %>
+                        <span><%= comments[i].id %> : <%= comments[i].comment_text %></span>
+                        <hr style="width: 85%; margin-right: 300px;">
+                    <% } %>
+                    </div>
+                <% } 
+                else { %>
+                <!-- 댓글이 없을 때의 처리 -->
+                <p class="no-comments">댓글이 없습니다.</p>
+                <% } %>
+            </div>   
+        </div>
+        <form action="/Reportread/<%=row.Q_Board_Id%>/comments" id="postForm" method="post" >
+            <input type="hidden" name="user_id" value="<%= user_id %>">
+            <textarea id="comment_text" name="comment_text" required placeholder="댓글을 입력해주세요"></textarea>
+            <div class="write-button">
+            <button class="btn" type="submit" style="cursor: pointer;">댓글쓰기</button>
+            </div>
+        </form>
     <script>
+        function goTohome(){
+            window.location.href = '/';
+        }
         function goToReportboard() {
         window.location.href = '/Reportboard';
     }

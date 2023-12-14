@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>글쓰기</title>
     <style>
+        header{
+            background-color: #5228f5ff;
+            height: 98px;
+            position: relative; 
+        }
         h1{
             text-align: left;            
             margin-top: 50px;
@@ -83,9 +88,24 @@
             padding-top: 0; 
             padding-left: 0;
         }
+        span.logo {
+            font-family: Inter;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin-left: 150px;
+            color: black;
+            font-size: 40px;
+            margin-top: 20px;
+            display: inline-block;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <span class="logo" style="cursor: pointer;" onclick="goTohome()">따릉이</span>
+    </header>
     <h1>글쓰기</h1>
     <form action="/Reportwrite" id="postForm" method="post" onsubmit="return writeSubmit()">
     <div class="container">
@@ -118,6 +138,9 @@
         </div>
     </form>
     <script>
+        function goTohome(){
+            window.location.href = '/';
+        }
         function writeSubmit(){
             if($("#title").val().trim()==""){
                 var message = "제목을 입력하세요.";
