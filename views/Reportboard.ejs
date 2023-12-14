@@ -146,7 +146,7 @@
         <% var oneItem = rows[i]; %>
             <tr style="height: 30px;">
                 <td class="w10"><%= oneItem.Q_Board_Id %></td>
-                <td class="w500"><%= oneItem.Q_Title %></td>
+                <td class="w500"><span class="link" style="cursor: pointer;" onclick="goToReportread('<%= oneItem.Q_Board_Id %>')"><%= oneItem.Q_Title %></td>
                 <td class="w160"><%= oneItem.id %></td>
                 <td class="w160"><%= oneItem.Q_views %></td>
             </tr>
@@ -160,6 +160,9 @@
     function goToReportwrite(){
         window.location.href = '/Reportwrite';
     }
+function goToReportread(boardId) {
+        window.location.href = '/Reportread/' + boardId;
+        }
     function search() {
     var input = document.getElementById('searchInput').value.toLowerCase();
     var table = document.getElementById('noticeTable');

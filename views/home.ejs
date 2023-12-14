@@ -161,7 +161,7 @@
               <span class="home-nav2">이용 방법</span>
               <span class="home-nav3">요금 안내</span>
               <span class="home-nav4">고객 지원</span>
-              <span class="home-nav5">블로그</span>
+              <span class="home-nav5" style="cursor: pointer;" onclick="goToFreeboard()">게시판</span>
             </nav>
             <% if (userLoggedIn) { %>
               <!-- 로그인 상태일 때 보이는 버튼 -->
@@ -288,6 +288,9 @@
     document.getElementById('rentButton').addEventListener('click', function () {
       window.location.href = '/rentmap'; // rentmap 라우터로 리디렉션
     });
+function goToFreeboard() {
+        window.location.href = '/Freeboard';
+    }
   </script>
   <script src="/viewscripts/userStatisticsChart.js"></script>
 </body>
