@@ -262,12 +262,22 @@
   background-color: var(--dl-color-primary1-blue80);
 }
 
-.visualization-container {
-display: flex;
-flex-direction: row; /* �붿냼�ㅼ쓣 媛�濡� 諛⑺뼢�쇰줈 �뺣젹�⑸땲�� */
-align-items: center; /* �몃줈 諛⑺뼢�먯꽌 以묒븰 �뺣젹�⑸땲�� */
-justify-content: center; /* 媛�濡� 諛⑺뼢�먯꽌�� 以묒븰 �뺣젹�⑸땲�� (�좏깮��) */
+.statistics-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
+
+.visualization-container {
+  /* 기존 스타일 유지 */
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .visualization-container .bar-chart,
 .visualization-container .pie-chart {
@@ -303,34 +313,21 @@ justify-content: center; /* 媛�濡� 諛⑺뼢�먯꽌�� 以묒븰 ��
   fill: black; /* �띿뒪�� �됱긽 */
 }
 
-  
-
-
 .home-hero1 {
   width: 100%;
   display: flex;
-  max-width: var(--dl-size-size-maxwidth);
-  min-height: auto;
-  align-items: center;
-  padding-top: var(--dl-space-space-sixunits);
-  padding-left: var(--dl-space-space-threeunits);
-  padding-right: var(--dl-space-space-threeunits);
-  flex-direction: column;
-  padding-bottom: var(--dl-space-space-sixunits);
   justify-content: center;
-}
-.home-container1 {
-  position: relative;
-  gap: var(--dl-space-space-twounits);
-  display: flex;
   align-items: center;
-  flex-direction: column;
-  text-align: left;
-  justify-content: flex-start;
-
-  
+  padding: 20px; /* 패딩 추가 */
 }
 
+.home-container1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* 세로 방향 정렬 */
+}
 
 
 .home-hero-heading {

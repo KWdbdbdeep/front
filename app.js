@@ -18,7 +18,7 @@ var userInfoRouter = require('./routes/manage/userInfo');
 var rentmapRouter = require('./routes/rent/rentmap');
 var Freeboard = require('./routes/Freeboard');
 var Reportboard = require('./routes/Reportboard');
-
+var userStatisticsRouter = require('./routes/userStatistics');
 
 var app = express();
 
@@ -51,6 +51,8 @@ app.use('/manage/userInfo', userInfoRouter);
 app.use('/logout', logoutRouter);
 app.use('/Freeboard', Freeboard);
 app.use('/Reportboard', Reportboard);
+app.use('/api', userStatisticsRouter);
+
 
 const updateUserRole = require('./public/viewscripts/userRole');
 
