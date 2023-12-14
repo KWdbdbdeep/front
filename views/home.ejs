@@ -164,9 +164,9 @@
               <span class="home-nav5">블로그</span>
             </nav>
             <% if (userLoggedIn) { %>
-            <!-- 로그인 상태일 때 보이는 버튼 -->
-            <button class="home-mypage button" id="mypageButton" onclick="location.href='/myinfo'">마이페이지</button>
-            <!-- <nav id="mypage" class="hidden">
+              <!-- 로그인 상태일 때 보이는 버튼 -->
+              <button class="home-mypage button" id="mypageButton" onclick="location.href='/myinfo'">마이페이지</button>
+              <!-- <nav id="mypage" class="hidden">
               <ul>
                 <li><a href="/myinfo">내 정보 관리</a></li>
                 <li><a href="/myposts">내 게시글 보기</a></li>
@@ -174,31 +174,28 @@
                 <li><a href="#" onclick="logout()">로그아웃</a></li>
               </ul>
             </nav> -->
-            <!-- <button onclick="location.href='/mypage'">마이 페이지</button> -->
-            <% } else { %>
-            <div class="home-buttons">
-              <!-- 이걸로 넘어가짐 -->
-              <button class="home-login button" onclick="location.href='/login'">Login</button>
-              <button class="home-register button" onclick="location.href='/register'">Register</button>
-              <!-- 로그인되지 않은 상태일 때 보이는 버튼
+              <!-- <button onclick="location.href='/mypage'">마이 페이지</button> -->
+              <% } else { %>
+                <div class="home-buttons">
+                  <!-- 이걸로 넘어가짐 -->
+                  <button class="home-login button" onclick="location.href='/login'">Login</button>
+                  <button class="home-register button" onclick="location.href='/register'">Register</button>
+                  <!-- 로그인되지 않은 상태일 때 보이는 버튼
                 <button onclick="location.href='/join'">회원가입</button>
                 <button onclick="location.href='/login'">로그인</button> -->
-              <% } %>
-              <!-- <div class="home-buttons">
+                  <% } %>
+                    <!-- <div class="home-buttons">
                 이걸로 넘어가짐
                 <button class="home-login button" onclick="location.href='/login'">Login</button>
                 <button class="home-register button" onclick="location.href='/register'">Register</button> -->
-            </div>
+                </div>
           </div>
         </header>
       </div>
       <div class="home-hero">
         <div class="home-hero1">
           <div class="home-container1">
-            <div class="visualization-container">
-              <svg id="bar-chart" class="bar-chart"></svg>
-              <svg id="pie-chart" class="pie-chart"></svg>
-            </div>
+
             <div class="home-btn-group">
               <button id="rentButton" class="home-hero-button1 button">대여하기</button>
               <button class="home-hero-button2 button">반납하기&nbsp;→</button>
@@ -212,20 +209,33 @@
         <div class="home-details1">
           <div class="home-container2">
             <span class="home-text sectionTitle">
-              <span>Details</span>
+              <span>Data Visualization</span>
               <br />
             </span>
             <h2 class="home-details-heading heading2">
-              따릉이 대여 홈페이지
+              따릉이 데이터 시각화
             </h2>
-            <span class="home-details-sub-heading">
-              따릉이 대여 홈페이지는 사용자들에게 편리한 따릉이 대여 서비스를
-              제공합니다. 따릉이를 이용하여 편안하고 빠른 이동을 경험해보세요.
-            </span>
+            <!-- 통계를 표시할 부모 컨테이너 -->
+            <div class="statistics-container">
+              <div class="age-statistics">
+                <span class="home-details-sub-heading">
+                  연령대 별 이용자 수 통계 현황 (update.23.01~06)
+                </span>
+                <div class="visualization-container">
+                  <svg id="age-bar-chart" width="500" height="300"></svg>
+                </div>
+              </div>
+              <div class="gender-statistics">
+                <span class="home-details-sub-heading">
+                  이용자 수 성별 통계 현황 (update.23.01~06)
+                </span>
+                <div class="visualization-container">
+                  <svg id="gender-pie-chart" width="500" height="300"></svg>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <img alt="image"
-            src="https://images.unsplash.com/photo-1612018611130-47cdcda2b331?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTcwMDIwMjg3N3w&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400"
-            class="home-details-image" />
         </div>
       </div>
       <div class="home-features"></div>
@@ -275,10 +285,11 @@
   <script src="viewscripts/home.js"></script>
   <script src="/viewscripts/logout.js"></script>
   <script>
-    document.getElementById('rentButton').addEventListener('click', function() {
+    document.getElementById('rentButton').addEventListener('click', function () {
       window.location.href = '/rentmap'; // rentmap 라우터로 리디렉션
     });
   </script>
+  <script src="/viewscripts/userStatisticsChart.js"></script>
 </body>
 
 </html>
