@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/manage.css' />
+</head>
+<body>
+    <div class="menu-logo" id="hiddenMenu">
+        <img src="/images/menu.png" alt="메뉴 로고">
+    </div>
+    <h1><%= title %></h1>
+    <h2><%= subtitle %></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>BID</th>
+                <th>상태</th>
+                <th>대여소 ID</th>
+                <th>상태 변경</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% rows.forEach(function(row) { %>
+            <tr>
+                <td><%= row.Bid %></td>
+                <td><%= row.Status %></td>
+                <td><%= row.Rental_Office_id %></td>
+                <td>
+                    <button onclick="changeBicycleStatus('<%= row.Bid %>', '<%= row.Status %>')">상태 변경</button>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    
+
+
+    <div class="menu-area">
+        <div class="menu-logo" id="activeMenu">
+            <img src="/images/menu.png" alt="메뉴 로고">
+        </div>
+        <ul>
+            <li><a href="/manage">회원 관리</a></li>
+            <ul class="sub-menu">
+                <li><a href="/manage">전체 회원 정보 조회</a></li>
+                <li><a href="/manage/userInfo">가입 회원 정보 조회</a></li>
+            </ul>
+            <li><a href="/manage/bicycle">따릉이 관리</a></li>
+            <li><a href="/manage/rental">고장신고 내역</a></li>
+            <li><a href="#" onclick="logout()">로그아웃</a></li>
+        </ul>
+        <div class="home-logo">
+            <a href="/manage">
+                <img src="/images/home.png" alt="홈 로고">
+            </a>
+        </div>
+    </div>
+    <script>
+        function changeBicycleStatus(bid, currentStatus) {
+            var newStatus = currentStatus === 1 ? 0 : 1;
+            var message = newStatus === 1 ? "따릉이를 사용 가능 상태로 변경하시겠습니까?" : "따릉이를 수리 필요 상태로 변경하시겠습니까?";
+
+            if (confirm(message)) {
+                fetch('/changeBicycleStatus', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id: bid, status: newStatus })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    alert(data.message);
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+            } else {
+                console.log("상태 변경 취소됨");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -15,6 +15,7 @@ var mypageRouter = require('./routes/mypage/mypage');
 var logoutRouter = require('./routes/logout');
 var myinfoRouter = require('./routes/mypage/myinfo');
 var manageRouter = require('./routes/manage/manage');
+var bicycleRouter = require('./routes/manage/bicycle');
 var userInfoRouter = require('./routes/manage/userInfo');
 var rentmapRouter = require('./routes/rent/rentmap');
 var Freeboard = require('./routes/Freeboard');
@@ -59,6 +60,7 @@ app.use('/mypage', mypageRouter);
 app.use('/rentmap', rentmapRouter);
 app.use('/manage', manageRouter);
 app.use('/manage/userInfo', userInfoRouter);
+app.use('/manage/bicycle', bicycleRouter); // 새로운 라우터를 애플리케이션에 추가
 app.use('/logout', logoutRouter);
 app.use('/Freeboard', Freeboard);
 app.use('/Reportboard', Reportboard);
