@@ -24,6 +24,7 @@ var Freewrite = require('./routes/Freewrite');
 var Reportwrite = require('./routes/Reportwrite');
 var Freeread = require('./routes/FreeRead');
 var Reportread = require('./routes/ReportRead');
+var updateUserInfoRouter = require('./routes/mypage/userInfoUpdateRouter');
 
 var app = express();
 
@@ -44,6 +45,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static('uploads'));
 
 app.use('/', homeRouter);
 app.use('/users', usersRouter);
@@ -61,6 +63,7 @@ app.use('/Freewrite', Freewrite);
 app.use('/Reportwrite', Reportwrite);
 app.use('/Freeread', Freeread);
 app.use('/Reportread', Reportread);
+app.use(updateUserInfoRouter);
 
 const updateUserRole = require('./public/viewscripts/userRole');
 
