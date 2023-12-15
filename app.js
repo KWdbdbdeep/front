@@ -24,6 +24,7 @@ var Freewrite = require('./routes/Freewrite');
 var Reportwrite = require('./routes/Reportwrite');
 var Freeread = require('./routes/FreeRead');
 var Reportread = require('./routes/ReportRead');
+var Myboard = require('./routes/Myboard');
 
 var app = express();
 
@@ -61,6 +62,7 @@ app.use('/Freewrite', Freewrite);
 app.use('/Reportwrite', Reportwrite);
 app.use('/Freeread', Freeread);
 app.use('/Reportread', Reportread);
+app.use('/Myboard', Myboard);
 
 const updateUserRole = require('./public/viewscripts/userRole');
 
