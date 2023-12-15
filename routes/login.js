@@ -9,16 +9,16 @@ require('dotenv').config();
 
 const app = express();
 
-// 세션 미들웨어 설정
-app.use(session({
-  secret: 'your_secret_key', // 세션 데이터 암호화를 위한 비밀 키
-  resave: false, // 세션 데이터의 저장 여부
-  saveUninitialized: true, // 초기화되지 않은 세션 데이터 저장 여부
-  cookie: {
-    secure: false, // HTTPS를 통해서만 세션 전송할 경우 true로 설정
-    maxAge: 3600000 // 세션의 유효 시간 (밀리초)
-  }
-}));
+// // 세션 미들웨어 설정
+// app.use(session({
+//   secret: 'dbproject2023', // 세션 데이터 암호화를 위한 비밀 키
+//   resave: false, // 세션 데이터의 저장 여부
+//   saveUninitialized: true, // 초기화되지 않은 세션 데이터 저장 여부
+//   cookie: {
+//     secure: false, // HTTPS를 통해서만 세션 전송할 경우 true로 설정
+//     maxAge: 3600000 // 세션의 유효 시간 (밀리초)
+//   }
+// }));
 
 // 데이터베이스 연결 풀 생성
 var pool = mysql.createPool({

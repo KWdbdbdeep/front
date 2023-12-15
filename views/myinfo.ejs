@@ -35,7 +35,14 @@
       <h2>프로필 정보</h2>
 
       <!-- 사용자 정보를 보여주는 부분 -->
-      <p id="image"> <img src="<%= user.Image || '/images/user_default.png' %>" alt="프로필 사진" width="100" height="100" />
+      <p id="image">
+        <% if (user.Image) { %>
+          <!-- 데이터베이스에 이미지 경로가 있는 경우 -->
+          <img src="<%= user.Image %>" alt="프로필 사진" width="100" height="100" />
+        <% } else { %>
+          <!-- 이미지 경로가 없는 경우 기본 이미지 표시 -->
+          <img src="/images/user_default.png" alt="프로필 사진" width="100" height="100" />
+        <% } %>
       </p>
 
       <p id="username">아이디: <span><%= user.Id %></span></p>
@@ -47,8 +54,6 @@
 
 
       <form id="editForm" style="display: none;">
-        <label for="newUsername">아이디:</label>
-        <input type="text" id="newUsername" name="newUsername"><br>
         <label for="newName">이름:</label>
         <input type="text" id="newName" name="newName"><br>
         <label for="newEmail">이메일:</label>
@@ -98,7 +103,6 @@
   <script>
     document.getElementById('editButton').addEventListener('click', function () {
       // 아이디와 이름 필드를 입력 가능한 입력 상태로 변경
-      document.getElementById('username').style.display = 'none';
       document.getElementById('name').style.display = 'none';
       document.getElementById('email').style.display = 'none';
       document.getElementById('phone').style.display = 'none';
@@ -116,7 +120,6 @@
       event.preventDefault(); // 폼 기본 동작 방지
 
       // 수정한 정보를 가져와서 서버로 전송하는 코드 작성
-      var newUsername = document.getElementById('newUsername').value;
       var newName = document.getElementById('newName').value;
       var newEmail = document.getElementById('newEmail').value;
       var newPhone = document.getElementById('newPhone').value;
@@ -124,7 +127,6 @@
       var newImage = document.getElementById('newImage').files[0]; // 파일 업로드 필드에서 파일 가져오기
 
       var formData = new FormData();
-      formData.append('newUsername', newUsername);
       formData.append('newName', newName);
       formData.append('newEmail', newEmail);
       formData.append('newPhone', newPhone);
@@ -142,7 +144,6 @@
         .then(function (data) {
           if (data.success) {
             // 수정이 성공하면 화면을 업데이트하고 수정 버튼을 활성화
-            document.getElementById('username').textContent = newUsername;
             document.getElementById('name').textContent = newName;
             document.getElementById('email').textContent = newEmail;
             document.getElementById('phone').textContent = newPhone;
