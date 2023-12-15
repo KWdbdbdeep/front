@@ -21,23 +21,60 @@ function initMap() {
     mapTypeControl: true,
     zoomControl: true
   });
+  naver.maps.Event.addListener(map, 'idle', loadStationsInView);
 
-  loadStationData(function(stations) {
-    // 대여소 마커 생성
-    stations.forEach(function(station) {
-      var position = new naver.maps.LatLng(station.Latitude, station.Longitude);
-      var marker = new naver.maps.Marker({
-        position: position,
-        map: map,
-        title: station.Station_Name
-      });
+  
+}
 
-      naver.maps.Event.addListener(marker, 'click', function() {
-        updateStationInfo(station);
-      });
-    });
+function loadStationsInView() {
+  const bounds = map.getBounds();
+  const sw = bounds.getSW();
+  const ne = bounds.getNE();
+
+  fetch(`/rentmap/stations?swLat=${sw.lat()}&swLng=${sw.lng()}&neLat=${ne.lat()}&neLng=${ne.lng()}`)
+    .then(response => response.json())
+    .then(stations => {
+        // 대여소 마커 생성
+        stations.forEach(function(station) {
+          var position = new naver.maps.LatLng(station.Latitude, station.Longitude);
+          var marker = new naver.maps.Marker({
+            position: position,
+            map: map,
+            title: station.Station_Name
+          });
+
+          naver.maps.Event.addListener(marker, 'click', function() {
+            updateStationInfo(station);
+          });
+        });
+    })
+    .catch(error => console.error('Error loading station data:', error));
+}
+// 자전거 반납 함수
+function returnBicycle() {
+  fetch('/rentmap/return-bicycle', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+    // body 부분을 제거합니다. 서버 측에서 세션에서 bikeId를 직접 가져옵니다.
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('자전거 반납 성공!');
+      window.location.reload(); // 페이지 새로고침 또는 리디렉션
+    } else {
+      alert('반납 실패: ' + data.message);
+    }
+  })
+  .catch(error => {
+    console.error('자전거 반납 중 에러 발생:', error);
+    alert('자전거 반납 실패');
   });
 }
+
+
 
 // 선택한 대여소의 정보를 업데이트하는 함수
 function updateStationInfo(station) {
@@ -111,31 +148,46 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // 자전거 대여 함수
+// 자전거 대여 함수
 function rentBicycle(rentalOfficeId) {
-  // 서버에 POST 요청하여 자전거 대여
   fetch('/rentmap/rent-bicycle', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      rentalOfficeId: rentalOfficeId,
-      // 클라이언트에서 userId를 전송하지 않고 서버에서 세션에서 가져옵니다.
-    }),
+    body: JSON.stringify({ rentalOfficeId: rentalOfficeId }),
   })
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-    throw new Error('Network response was not ok.');
-  })
+  .then(response => response.json())
   .then(data => {
-    // 성공 처리
-    alert('자전거 대여 성공!');
+    if (data.success) {
+      alert(`자전거 대여 성공! 자전거 번호: ${data.bikeId}`);
+      updateRentalStatus(data.bikeId);
+      if (data.redirect) {
+        window.location.href = data.redirect; // 리디렉션 처리
+      }
+    } else {
+      alert(`대여 실패: ${data.message}`);
+    }
   })
   .catch(error => {
-    console.error('자전거 대여 중 에러 발생:', error);
-    alert('자전거 대여 실패.');
+    alert(`자전거 대여 실패: ${error.message}`);
   });
 }
 
+
+
+// 대여 상태를 업데이트하는 함수
+function updateRentalStatus(bikeId) {
+  // 대여한 자전거 정보를 화면에 표시
+  var rentalInfoDiv = document.getElementById("rentalInfo");
+  if (rentalInfoDiv) {
+    rentalInfoDiv.innerHTML = `대여한 자전거 번호: ${bikeId}`;
+    rentalInfoDiv.style.display = "block";
+  }
+
+  // "대여하기" 버튼 텍스트 변경
+  var rentButton = document.getElementById("rentButton");
+  if (rentButton) {
+    rentButton.innerText = "대여 중";
+  }
+}

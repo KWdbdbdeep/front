@@ -15,7 +15,19 @@ var pool = mysql.createPool({
 
 router.get('/', function(req, res) {
     let userLoggedIn = req.session.loggedIn; // 세션에서 로그인 상태 확인
-    res.render('home', { userLoggedIn: userLoggedIn });
-});
-
-module.exports = router;
+    let rentalInfo = req.session.rental || {}; // 세션에서 대여 정보 확인
+  
+    // home.ejs에 전달할 데이터 객체
+    const data = {
+        userLoggedIn: userLoggedIn,
+        rentalSuccess: rentalInfo.bikeId ? true : false,
+        bikeId: rentalInfo.bikeId,
+        stationName: rentalInfo.stationName,
+        rentStartTime: rentalInfo.rentStartTime,
+        stationAddress: rentalInfo.stationAddress
+    };
+  
+    res.render('home', data);
+  });
+  
+  module.exports = router;
