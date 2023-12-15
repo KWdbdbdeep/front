@@ -26,6 +26,9 @@ var Freeread = require('./routes/FreeRead');
 var Reportread = require('./routes/ReportRead');
 var Myboard = require('./routes/Myboard');
 
+var updateUserInfoRouter = require('./routes/mypage/userInfoUpdateRouter');
+
+
 var app = express();
 
 // view engine setup
@@ -45,6 +48,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static('uploads'));
 
 app.use('/', homeRouter);
 app.use('/users', usersRouter);
@@ -63,6 +67,8 @@ app.use('/Reportwrite', Reportwrite);
 app.use('/Freeread', Freeread);
 app.use('/Reportread', Reportread);
 app.use('/Myboard', Myboard);
+
+app.use(updateUserInfoRouter);
 
 const updateUserRole = require('./public/viewscripts/userRole');
 
