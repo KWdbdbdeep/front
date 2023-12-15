@@ -80,7 +80,7 @@
     </div>
     <ul>
       <li><a href="/myinfo">내 정보 관리</a></li>
-      <li><a href="/posts">내 게시글 보기</a></li>
+      <li><a href="/Myboard">내 게시글 보기</a></li>
       <li><a href="/rentals">대여 내역</a></li>
       <li><a href="#" onclick="logout()">로그아웃</a></li>
     </ul>
@@ -94,7 +94,7 @@
   <div class="menu">
     <ul>
       <li><a href="/myinfo">내 정보 관리</a></li>
-      <li><a href="/posts">내 게시글 보기</a></li>
+      <li><a href="/Myboard"></a>내 게시글 보기</a></li>
       <li><a href="/rentals">대여 내역</a></li>
       <li><a href="#" onclick="logout()">로그아웃</a></li>
     </ul>
@@ -103,6 +103,8 @@
   <script>
     document.getElementById('editButton').addEventListener('click', function () {
       // 아이디와 이름 필드를 입력 가능한 입력 상태로 변경
+      document.getElementById('userId').style.display = 'none';
+
       document.getElementById('name').style.display = 'none';
       document.getElementById('email').style.display = 'none';
       document.getElementById('phone').style.display = 'none';
@@ -183,6 +185,12 @@
       menuArea.classList.toggle('hidden');
     });
   </script>
+  <script>
+    function goToMyread(userId) {
+        // 게시글 보기 페이지로 이동하는 로직을 추가할 수 있습니다.
+        window.location.href = '/MyBoard/' + userId;  // Myread 페이지로 이동하는 경로로 변경하세요.
+    }
+</script>
   <script src="/viewscripts/logout.js"></script>
 </body>
 

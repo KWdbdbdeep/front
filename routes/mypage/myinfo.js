@@ -45,7 +45,8 @@ router.get('/getUserInfo', function (req, res, next) {
 
       // 조회된 데이터와 함께 마이페이지 템플릿을 렌더링합니다.
       res.render('myinfo', {
-        user: user
+        user: user,
+        userId: userId
       });
     });
   });
@@ -87,7 +88,8 @@ router.get('/', function (req, res, next) {
 
       // 조회된 데이터와 함께 마이페이지 템플릿을 렌더링합니다.
       res.render('myinfo', {
-        user: user
+        user: user,
+        userId:userId
       });
     });
   });
