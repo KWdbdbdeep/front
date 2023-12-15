@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/manage.css' />
+</head>
+<style>
+     .write-button {
+            text-align: center;
+            margin-top : 20px;
+        }
+
+        .btn,
+        .Wbtn {
+            display: inline-block;
+            background: #5228f5ff;
+            border: 0.5px solid black;
+            color: white;
+            width: 150px;
+            height: 40px;
+        }
+</style>
+<body>
+  </div>
+  <h1>
+    <%= title %>
+  </h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Bicycle ID</th>
+        <th>User ID</th>
+        <th>Rent Start Date</th>
+        <th>Status</th>
+        <th>Rent Finish Date</th>
+        <th>Rent Start Location</th>
+        <th>Rent Finish Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i=0; i < rows.length; i++) { %>
+        <% if (rows[i].Id === userId) { %>
+          <tr>
+            <td>
+              <%= rows[i].Bid %>
+            </td>
+            <td>
+              <%= rows[i].Id %>
+            </td>
+            <td>
+              <%= rows[i].Rent_Start_Date %>
+            </td>
+            <td>
+              <%= rows[i].Status === 1 ? '대여중' : '반납됨' %>
+            </td>
+            <td>
+              <%= rows[i].Rent_Finish_Date %>
+            </td>
+            <td>
+              <%= rows[i].Rent_Start_Location %>
+            </td>
+            <td>
+              <%= rows[i].Rent_Finish_Location %>
+            </td>
+          </tr>
+        <% } %>
+      <% } %>
+    </tbody>
+  </table>
+  <div class="write-button">
+    <button class="btn" type="button" style="cursor: pointer;" onclick="goTomyinfo()">뒤로가기</button>
+    </div>
+</body>
+<script>
+    function goTomyinfo() {
+            window.location.href = '/myinfo';
+        }
+</script>
+
+</html>
