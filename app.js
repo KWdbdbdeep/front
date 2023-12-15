@@ -25,6 +25,7 @@ var Reportwrite = require('./routes/Reportwrite');
 var Freeread = require('./routes/FreeRead');
 var Reportread = require('./routes/ReportRead');
 var Myboard = require('./routes/Myboard');
+var Myrent = require('./routes/Myrent');
 
 var updateUserInfoRouter = require('./routes/mypage/userInfoUpdateRouter');
 
@@ -67,6 +68,7 @@ app.use('/Reportwrite', Reportwrite);
 app.use('/Freeread', Freeread);
 app.use('/Reportread', Reportread);
 app.use('/Myboard', Myboard);
+app.use('/Myrent', Myrent);
 
 app.use(updateUserInfoRouter);
 
